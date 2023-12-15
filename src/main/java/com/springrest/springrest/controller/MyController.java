@@ -2,8 +2,9 @@ package com.springrest.springrest.controller;
 
 import com.springrest.springrest.entities.Course;
 import com.springrest.springrest.services.CourseService;
-import com.springrest.springrest.services.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,5 +38,16 @@ public class MyController {
     @PutMapping("/courses")
     public Course updateCourse(@RequestBody Course course) {
         return this.courseService.updateCourse(course);
+    }
+
+    @DeleteMapping("/courses/{courseId}")
+    public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String courseId) {
+        try {
+            //return this.courseService.deleteCourse(Integer.parseInt(courseId));
+            this.courseService.deleteCourse(Integer.parseInt(courseId));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

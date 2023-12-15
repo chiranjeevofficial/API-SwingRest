@@ -51,4 +51,16 @@ public class CourseServiceImpl implements CourseService{
         }
         return course;
     }
+
+    @Override
+    public void deleteCourse(int courseId) {
+        Course course = null;
+        for (Course course1 : list) {
+            if (courseId == course1.getId()) {
+                course = course1;
+                list.remove(course1);
+                break;
+            }
+        }
+    }
 }
